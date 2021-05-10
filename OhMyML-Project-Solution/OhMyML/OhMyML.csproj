@@ -7,5 +7,9 @@
 
   <ItemGroup>
     <Folder Include="SourceCode\MLType\" />
+    <Folder Include="SourceCode\MLType\Reinforcement Learning\" />
+    <Folder Include="SourceCode\MLType\Supervised Learning\" />
+    <Folder Include="SourceCode\MLType\Unsupervised Learning\" />
+    <Folder Include="SourceCode\MLType\Deep Learning\" />
   </ItemGroup>
 </Project>
