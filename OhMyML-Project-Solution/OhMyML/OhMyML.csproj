@@ -12,4 +12,8 @@
     <Folder Include="SourceCode\MLType\Unsupervised Learning\" />
     <Folder Include="SourceCode\MLType\Deep Learning\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
+  </ItemGroup>
 </Project>
