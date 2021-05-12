@@ -21,8 +21,8 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
 
         public void Fit(float[] X, float[] y)
         {
-            var ssxy = X.Zip(y, (a, b) => a * b).Sum() - X.Length * X.Average() * y.Average();
-            var ssxx = X.Zip(X, (a, b) => a * b).Sum() - X.Length * X.Average() * X.Average();
+            float ssxy = X.Zip(y, (a, b) => a * b).Sum() - X.Length * X.Average() * y.Average();
+            float ssxx = X.Zip(X, (a, b) => a * b).Sum() - X.Length * X.Average() * X.Average();
 
             _b1 = ssxy / ssxx;
             _b0 = y.Average() - _b1 * X.Average();
@@ -49,10 +49,10 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
 
         public void Fit(double[,] X, double[,] y)
         {
-            var input = ExtendInputWithOnes(X);
-            var output = Matrix<double>.Build.DenseOfArray(y);
+            Matrix<double> input = ExtendInputWithOnes(X);
+            Matrix<double> output = Matrix<double>.Build.DenseOfArray(y);
 
-            var coefficients = ((input.Transpose() * input).Inverse() * input.Transpose() * output)
+            Vector<double> coefficients = ((input.Transpose() * input).Inverse() * input.Transpose() * output)
                                 .Transpose().Row(0);
 
             _b = coefficients.ElementAt(0);
@@ -61,8 +61,8 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
 
         public double Predict(double[,] x)
         {
-            var input = Matrix<double>.Build.DenseOfArray(x).Transpose();
-            var w = Vector<double>.Build.DenseOfArray(_w);
+            Matrix<double> input = Matrix<double>.Build.DenseOfArray(x).Transpose();
+            Vector<double> w = Vector<double>.Build.DenseOfArray(_w);
             return input.Multiply(w).ToArray().Sum() + _b;
         }
 
@@ -73,8 +73,8 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
         /// <returns></returns>
         private Matrix<double> ExtendInputWithOnes(double[,] X)
         {
-            var ones = Matrix<double>.Build.Dense(X.GetLength(0), 1, 1d);
-            var extendedX = ones.Append(Matrix<double>.Build.DenseOfArray(X));
+            Matrix<double> ones = Matrix<double>.Build.Dense(X.GetLength(0), 1, 1d);
+            Matrix<double> extendedX = ones.Append(Matrix<double>.Build.DenseOfArray(X));
             return extendedX;
         }
 

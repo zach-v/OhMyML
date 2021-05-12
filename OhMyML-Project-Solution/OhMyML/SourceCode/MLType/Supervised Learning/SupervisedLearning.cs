@@ -13,10 +13,10 @@ namespace OhMyML.SourceCode
             float[] X = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             float[] y = { 6, 6, 11, 17, 16, 20, 23, 23, 29, 33, 39 };
 
-            var linearRegressor = new LinearRegressor();
+            LinearRegressor linearRegressor = new LinearRegressor();
             linearRegressor.Fit(X, y);
 
-            var predictions = linearRegressor.Predict(X);
+            float[] predictions = linearRegressor.Predict(X);
 
             Console.WriteLine("Predictions:");
             Console.WriteLine($"{string.Join(", ", predictions.Select(p => p.ToString()))}");
@@ -35,10 +35,10 @@ namespace OhMyML.SourceCode
 
             double[,] y = { { 6 }, { 6 }, { 11 } };
 
-            var linearRegressor = new MultipleLinearRegressor();
+            MultipleLinearRegressor linearRegressor = new MultipleLinearRegressor();
             linearRegressor.Fit(X, y);
 
-            var prediction = linearRegressor.Predict(new double[,] { { 3 }, { 5 }, { 7 } });
+            double prediction = linearRegressor.Predict(new double[,] { { 3 }, { 5 }, { 7 } });
 
             Console.WriteLine($"Prediction: {prediction}");
         }
