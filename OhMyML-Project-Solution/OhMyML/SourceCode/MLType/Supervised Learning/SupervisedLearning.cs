@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using OhMyML.SourceCode.MLType;
+using OhMyML.SourceCode.MLType.Supervised_Learning;
 using OhMyML.SourceCode.MLType.SupervisedLearning;
 
 namespace OhMyML.SourceCode
