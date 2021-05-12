@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OhMyML.SourceCode;
+using OhMyML.SourceCode.MLType.SupervisedLearning;
+using System;
+using System.Collections.Generic;
 
 namespace OhMyML
 {
@@ -6,7 +9,8 @@ namespace OhMyML
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			SupervisedLearning<string, LinearRegressor, double> sl;
+			sl = new SupervisedLearning<string, LinearRegressor, double>();
 		}
 	}
 }
