@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
+using OhMyML.SourceCode.MLType.Supervised_Learning;
 
 namespace OhMyML.SourceCode.MLType.SupervisedLearning
 {
-    public abstract class Regressor<I, O>
-	{
-        public abstract void Fit(I x, I y);
-        public abstract O Predict(I x);
-	}
     /// <summary>
     /// Simple Linear Regression implementation
     /// Performs linear regression on one feature and on output value
     /// </summary>
-    public class LinearRegressor : Regressor<float[], float[]>
+    public class LinearRegressor : Regressor<float[]>
     {
         private float _b0;
         private float _b1;

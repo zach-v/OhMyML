@@ -5,9 +5,8 @@ using OhMyML.SourceCode.MLType.SupervisedLearning;
 
 namespace OhMyML.SourceCode
 {
-	public class SupervisedLearning<I, L, O> : MLTypeInterface<I, L, O>
+	public class SupervisedLearning<I, L, O> : MLTypeInterface<I, L, O> where L : IRegressor
 	{
-
 		public static void SingleLinearRegression(string[] args)
 		{
 			// Hard Coded for now
