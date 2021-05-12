@@ -6,7 +6,7 @@ using OhMyML.SourceCode.MLType.SupervisedLearning;
 
 namespace OhMyML.SourceCode
 {
-	public class SupervisedLearning<I, L, O> : MLTypeInterface<I, L, O> where L : IRegressor
+	public class SupervisedLearning<I, L, O> : MLTypeInterface<I, L, O> where L : Regressor<I>, Regressor<I,O>
 	{
 		public static void SingleLinearRegression(string[] args)
 		{

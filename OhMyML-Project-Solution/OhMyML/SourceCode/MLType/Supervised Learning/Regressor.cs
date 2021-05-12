@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace OhMyML.SourceCode.MLType.Supervised_Learning
 {
-    public interface IRegressor { }
-    public abstract class Regressor<I> : IRegressor
+    public interface Regressor<I>
     {
-        public abstract void Fit(I x, I y);
-        public abstract I Predict(I x);
+        public void Fit(I x, I y);
+        public I Predict(I x);
     }
-    public abstract class Regressor<I, O> : IRegressor
+    public interface Regressor<I, O>
     {
-        public abstract void Fit(I x, I y);
-        public abstract O Predict(I x);
+        public void Fit(I x, I y);
+        public O Predict(I x);
     }
 }
