@@ -9,8 +9,8 @@ namespace OhMyML
 	{
 		static void Main(string[] args)
 		{
-			SupervisedLearning<string, LinearRegressor, double> sl;
-			sl = new SupervisedLearning<string, LinearRegressor, double>();
+			SupervisedLearning<float[], LinearRegressor, float[]> sl;
+			sl = new SupervisedLearning<float[], LinearRegressor, float[]>();
 		}
 	}
 }
