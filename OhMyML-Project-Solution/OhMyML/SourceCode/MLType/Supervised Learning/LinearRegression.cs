@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
+using OhMyML.SourceCode.MLType.Supervised_Learning;
 
 namespace OhMyML.SourceCode.MLType.SupervisedLearning
 {
-    public abstract class Regressor<I, O>
-	{
-        public abstract void Fit(I x, I y);
-        public abstract O Predict(I x);
-	}
     /// <summary>
     /// Simple Linear Regression implementation
     /// Performs linear regression on one feature and on output value
     /// </summary>
-    public class LinearRegressor : Regressor<float[], float[]>
+    public class LinearRegressor : Regressor<float[]>
     {
         private float _b0;
         private float _b1;
@@ -24,7 +20,7 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _b1 = 1;
         }
 
-        public override void Fit(float[] X, float[] y)
+        public void Fit(float[] X, float[] y)
         {
             float ssxy = X.Zip(y, (a, b) => a * b).Sum() - X.Length * X.Average() * y.Average();
             float ssxx = X.Zip(X, (a, b) => a * b).Sum() - X.Length * X.Average() * X.Average();
@@ -33,7 +29,7 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _b0 = y.Average() - _b1 * X.Average();
         }
 
-        public override float[] Predict(float[] x)
+        public float[] Predict(float[] x)
         {
             return x.Select(i => _b0 + i * _b1).ToArray();
         }
@@ -52,7 +48,7 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _b = 0;
         }
 
-        public override void Fit(double[,] X, double[,] y)
+        public void Fit(double[,] X, double[,] y)
         {
             Matrix<double> input = ExtendInputWithOnes(X);
             Matrix<double> output = Matrix<double>.Build.DenseOfArray(y);
@@ -64,7 +60,7 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _w = SubArray(coefficients.ToArray(), 1, X.GetLength(1));
         }
 
-        public override double Predict(double[,] x)
+        public double Predict(double[,] x)
         {
             Matrix<double> input = Matrix<double>.Build.DenseOfArray(x).Transpose();
             Vector<double> w = Vector<double>.Build.DenseOfArray(_w);
