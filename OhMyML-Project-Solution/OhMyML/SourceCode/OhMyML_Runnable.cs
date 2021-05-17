@@ -2,6 +2,7 @@
 using OhMyML.SourceCode.MLType.SupervisedLearning;
 using System;
 using System.Collections.Generic;
+using OhMyML.SourceCode.MLType.Supervised_Learning;
 
 namespace OhMyML
 {

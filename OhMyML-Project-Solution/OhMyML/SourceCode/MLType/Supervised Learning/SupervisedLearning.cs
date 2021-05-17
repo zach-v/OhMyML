@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
-using OhMyML.SourceCode.MLType;
-using OhMyML.SourceCode.MLType.Supervised_Learning;
 using OhMyML.SourceCode.MLType.SupervisedLearning;
 
-namespace OhMyML.SourceCode
+namespace OhMyML.SourceCode.MLType.Supervised_Learning
 {
-	public class SupervisedLearning<I, L, O> : MLTypeInterface<I, L, O> where L : Regressor<I>, Regressor<I,O>
+	public class SupervisedLearning<I, L, O> : MLTypeInterface<I, L, O> where L : IRegressor
 	{
 		public static void SingleLinearRegression(string[] args)
 		{
