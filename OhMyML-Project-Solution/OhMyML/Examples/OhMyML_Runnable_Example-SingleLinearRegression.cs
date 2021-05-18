@@ -9,7 +9,7 @@ namespace OhMyML
 	static class OhMyMLRunnable_Example_SingleLinearRegression
 	{
 		// Example entry point
-		static void Main()
+		static void main()
 		{
 			// Example of data input
 			float[] X = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };

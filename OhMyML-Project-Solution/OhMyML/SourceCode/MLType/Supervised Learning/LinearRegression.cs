@@ -88,12 +88,18 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
             return input.Multiply(w).ToArray().Sum() + _b;
         }
 
-        /// <summary>
-        /// Add 'ones' to the input array to model coefficient b in data
-        /// </summary>
-        /// <param name="X"></param>
-        /// <returns></returns>
-        private Matrix<double> ExtendInputWithOnes(double[,] X)
+        // NOT ACTUALLY GOING TO MAKE A NEW METHOD. just gonna figure out how to make this generic enough...
+		internal void Fit(IEnumerable<double[,]> enumerable1, IEnumerable<double[,]> enumerable2)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Add 'ones' to the input array to model coefficient b in data
+		/// </summary>
+		/// <param name="X"></param>
+		/// <returns></returns>
+		private Matrix<double> ExtendInputWithOnes(double[,] X)
         {
             Matrix<double> ones = Matrix<double>.Build.Dense(X.GetLength(0), 1, 1d);
             Matrix<double> extendedX = ones.Append(Matrix<double>.Build.DenseOfArray(X));

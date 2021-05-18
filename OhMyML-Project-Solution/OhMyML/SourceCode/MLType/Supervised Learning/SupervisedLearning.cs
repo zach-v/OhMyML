@@ -8,6 +8,7 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
 	public class SupervisedLearning<I, L, O> : MLTypeInterface<OhMath.DimensionalHolder<I>, L, IEnumerable<O>> where L : IRegressor
 	{
 		private LinearRegressor linearRegressor;
+		private MultipleLinearRegressor multipleRegressor;
 		private void SingleLinearRegression(OhMath.DimensionalHolder<I> input)
 		{
 			linearRegressor = new LinearRegressor();
@@ -24,34 +25,26 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
 			return linearRegressor.Predict(input.OfType<float>()).Cast<O>();
 		}
 
-		public static void MultipleLinearRegression()
+		private void MultipleLinearRegression(OhMath.DimensionalHolder<I> input)
 		{
-			// Hard coded for now
-			double[,] X = { { 1, 2, 3},
-							{ 2, 9, 11 },
-							{ 56, 111, 66}};
+			multipleRegressor = new MultipleLinearRegressor();
 
-			double[,] y = { { 6 }, { 6 }, { 11 } };
-
-			MultipleLinearRegressor linearRegressor = new MultipleLinearRegressor();
-			linearRegressor.Fit(X, y);
-
-			double prediction = linearRegressor.Predict(new double[,] { { 3 }, { 5 }, { 7 } });
-
-			Console.WriteLine($"Prediction: {prediction}");
+			// We assume the same thing of having 2 inputs
+			if (input.items.Count >= 1)
+				multipleRegressor.Fit(input.items[0].OfType<double[,]>(), input.items[1].OfType<double[,]>());
 		}
-		
 		public void SetInput(OhMath.DimensionalHolder<I> input)
 		{
 			if (typeof(L) == typeof(LinearRegressor))
 				SingleLinearRegression(input);
 		}
 
-		public IEnumerable<O> GetOutput(IEnumerable<O> input)
+		public O GetOutput(IEnumerable<O> input)
 		{
 			if (typeof(L) == typeof(LinearRegressor))
-				return SingleLinearRegressionPredict(input);
-			return null;
+				if(typeof(O).IsAssignableFrom(typeof(IEnumerable<O>)))
+					return (O)Convert.ChangeType(SingleLinearRegressionPredict(input), typeof(IEnumerable<O>));
+			return default;
 		}
 	}
 }
