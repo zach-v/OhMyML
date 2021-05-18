@@ -20,6 +20,11 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _b1 = 1;
         }
 
+        /// <summary>
+        /// Train the Single Linear Regression algoritm.
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="y"></param>
         public void Fit(float[] X, float[] y)
         {
             float ssxy = X.Zip(y, (a, b) => a * b).Sum() - X.Length * X.Average() * y.Average();
@@ -29,6 +34,11 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _b0 = y.Average() - _b1 * X.Average();
         }
 
+        /// <summary>
+        /// Predict new values(Single Regression).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public float[] Predict(float[] x)
         {
             return x.Select(i => _b0 + i * _b1).ToArray();
@@ -48,6 +58,11 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _b = 0;
         }
 
+        /// <summary>
+        /// Train the Multiple Linear Regression Algorithm
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="y"></param>
         public void Fit(double[,] X, double[,] y)
         {
             Matrix<double> input = ExtendInputWithOnes(X);
@@ -60,6 +75,11 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             _w = SubArray(coefficients.ToArray(), 1, X.GetLength(1));
         }
 
+        /// <summary>
+        /// Predict new values (Multiple Regression).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public double Predict(double[,] x)
         {
             Matrix<double> input = Matrix<double>.Build.DenseOfArray(x).Transpose();
