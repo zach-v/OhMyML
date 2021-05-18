@@ -9,7 +9,6 @@
     <Folder Include="SourceCode\MLType\Reinforcement Learning\" />
     <Folder Include="SourceCode\MLType\Unsupervised Learning\" />
     <Folder Include="SourceCode\MLType\Deep Learning\" />
-    <Folder Include="SourceCode\Examples\" />
   </ItemGroup>
 
   <ItemGroup>

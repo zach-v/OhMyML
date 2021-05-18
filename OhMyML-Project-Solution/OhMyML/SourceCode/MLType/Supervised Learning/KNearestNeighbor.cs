@@ -7,6 +7,19 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
 {
 	public class KNearestNeighbor : Classify<double[]>
 	{
-		
+		public double[] Evaluate(double[] x)
+		{
+			throw new NotImplementedException();
+		}
+
+		public double[] Save(double[] x)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Train(double[] x, double[] y)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -1,31 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OhMyML.SourceCode.MLType.SupervisedLearning;
 
 namespace OhMyML.SourceCode.MLType.Supervised_Learning
 {
-	public class SupervisedLearning<I, L, O> : MLTypeInterface<I, L, O> where L : IRegressor
+	public class SupervisedLearning<I, L, O> : MLTypeInterface<OhMath.DimensionalHolder<I>, L, IEnumerable<O>> where L : IRegressor
 	{
-		public static void SingleLinearRegression(string[] args)
+		private LinearRegressor linearRegressor;
+		private void SingleLinearRegression(OhMath.DimensionalHolder<I> input)
 		{
-			// Hard Coded for now
-			float[] X = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-			float[] y = { 6, 6, 11, 17, 16, 20, 23, 23, 29, 33, 39 };
+			linearRegressor = new LinearRegressor();
 
-			LinearRegressor linearRegressor = new LinearRegressor();
-			linearRegressor.Fit(X, y);
-
-			float[] predictions = linearRegressor.Predict(X);
-
-			Console.WriteLine("Predictions:");
-			Console.WriteLine($"{string.Join(", ", predictions.Select(p => p.ToString()))}");
-
-			Console.WriteLine("Actual Value: ");
-			Console.WriteLine($"{string.Join(", ", y.Select(p => p.ToString()))}");
-			Console.ReadLine();
+			// We assume the holder has 2 inputs 
+			if (input.items.Count >= 1)
+				linearRegressor.Fit(input.items[0].OfType<float>(), input.items[1].OfType<float>());
+			else
+				Console.WriteLine("Dimensional holder contains no items");
 		}
 
-		public static void MultipleLinearRegression(string[] args)
+		private IEnumerable<O> SingleLinearRegressionPredict(IEnumerable<O> input)
+		{
+			return linearRegressor.Predict(input.OfType<float>()).Cast<O>();
+		}
+
+		public static void MultipleLinearRegression()
 		{
 			// Hard coded for now
 			double[,] X = { { 1, 2, 3},
@@ -41,16 +40,18 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
 
 			Console.WriteLine($"Prediction: {prediction}");
 		}
-
-		public void SetInput(I input)
+		
+		public void SetInput(OhMath.DimensionalHolder<I> input)
 		{
-			if (typeof(L) == typeof(MultipleLinearRegressor))
-				throw new NotImplementedException();
+			if (typeof(L) == typeof(LinearRegressor))
+				SingleLinearRegression(input);
 		}
 
-		public O GetOutput()
+		public IEnumerable<O> GetOutput(IEnumerable<O> input)
 		{
-			throw new NotImplementedException();
+			if (typeof(L) == typeof(LinearRegressor))
+				return SingleLinearRegressionPredict(input);
+			return null;
 		}
 	}
 }
