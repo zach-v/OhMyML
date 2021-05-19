@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
-using OhMyML.SourceCode.MLType.Supervised_Learning;
 
-namespace OhMyML.SourceCode.MLType.SupervisedLearning
+namespace OhMyML.SourceCode.MLType.Supervised_Learning
 {
     /// <summary>
     /// Simple Linear Regression implementation
     /// Performs linear regression on one feature and on output value
     /// </summary>
-    public class LinearRegressor : Regressor<float[]>
+    public class LinearRegressor : Regressor<IEnumerable<float>>
     {
         private float _b0;
         private float _b1;
@@ -23,15 +24,15 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
         /// <summary>
         /// Train the Single Linear Regression algoritm.
         /// </summary>
-        /// <param name="X"></param>
+        /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Fit(float[] X, float[] y)
+        public void Fit(IEnumerable<float> x, IEnumerable<float> y)
         {
-            float ssxy = X.Zip(y, (a, b) => a * b).Sum() - X.Length * X.Average() * y.Average();
-            float ssxx = X.Zip(X, (a, b) => a * b).Sum() - X.Length * X.Average() * X.Average();
+            float ssxy = x.Zip(y, (a, b) => a * b).Sum() - x.Count() * x.Average() * y.Average();
+            float ssxx = x.Zip(x, (a, b) => a * b).Sum() - x.Count() * x.Average() * x.Average();
 
             _b1 = ssxy / ssxx;
-            _b0 = y.Average() - _b1 * X.Average();
+            _b0 = y.Average() - _b1 * x.Average();
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public float[] Predict(float[] x)
+        public IEnumerable<float> Predict(IEnumerable<float> x)
         {
             return x.Select(i => _b0 + i * _b1).ToArray();
         }
@@ -87,12 +88,18 @@ namespace OhMyML.SourceCode.MLType.SupervisedLearning
             return input.Multiply(w).ToArray().Sum() + _b;
         }
 
-        /// <summary>
-        /// Add 'ones' to the input array to model coefficient b in data
-        /// </summary>
-        /// <param name="X"></param>
-        /// <returns></returns>
-        private Matrix<double> ExtendInputWithOnes(double[,] X)
+        // NOT ACTUALLY GOING TO MAKE A NEW METHOD. just gonna figure out how to make this generic enough...
+		internal void Fit(IEnumerable<double[,]> enumerable1, IEnumerable<double[,]> enumerable2)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Add 'ones' to the input array to model coefficient b in data
+		/// </summary>
+		/// <param name="X"></param>
+		/// <returns></returns>
+		private Matrix<double> ExtendInputWithOnes(double[,] X)
         {
             Matrix<double> ones = Matrix<double>.Build.Dense(X.GetLength(0), 1, 1d);
             Matrix<double> extendedX = ones.Append(Matrix<double>.Build.DenseOfArray(X));

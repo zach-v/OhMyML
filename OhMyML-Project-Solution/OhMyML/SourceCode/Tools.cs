@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace OhMyML.SourceCode
 {
-    public class Tools
+    public static class Tools
     {
-        public Tools()
-        {
-        }
+	    public static IEnumerable<T> ToEnumerable<T>(this Array target)
+	    {
+		    foreach (var item in target)
+			    yield return (T)item;
+	    }
     }
 }
