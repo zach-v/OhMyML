@@ -1,7 +1,7 @@
 ﻿using System;
 namespace OhMyML.SourceCode.MLType.DeepLearning
 {
-    public class DeepLearning<L> : MLTypeInterface<double[], L, double[]>
+    public class DeepLearning<L>
     {
         public DeepLearning()
         {

@@ -9,20 +9,20 @@ namespace OhMyML
 	static class OhMyMLRunnable_Example_SingleLinearRegression
 	{
 		// Example entry point
-		static void main()
+		static void Main()
 		{
 			// Example of data input
-			float[] X = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+			float[] x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 			float[] y = { 6, 6, 11, 17, 16, 20, 23, 23, 29, 33, 39 };
 
-			// Creating a new Supervised Learning Object with the type LinearRegressor
-			SupervisedLearning<float, LinearRegressor, float> sl = new SupervisedLearning<float, LinearRegressor, float>();
+			// Creating a new LinearRegressor
+			LinearRegressor lr = new LinearRegressor();
 
 			// Setting the input by creating a holder of the data
-			sl.SetInput(OhMath.CreateHolder(X.AsEnumerable(), y.AsEnumerable()));
+			lr.Fit(x, y);
 
 			// Getting the output predictions from our learning container
-			float[] predictions = (float[]) sl.GetOutput(X.AsEnumerable());
+			float[] predictions = lr.Predict(x).ToArray();
 
 			// Displaying the output in console
 			Console.WriteLine("Predictions:");
