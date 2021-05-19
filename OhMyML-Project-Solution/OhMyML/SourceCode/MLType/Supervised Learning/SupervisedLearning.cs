@@ -9,6 +9,7 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
 	{
 		private LinearRegressor linearRegressor;
 		private MultipleLinearRegressor multipleRegressor;
+
 		private void SingleLinearRegression(OhMath.DimensionalHolder<I> input)
 		{
 			linearRegressor = new LinearRegressor();
@@ -33,6 +34,12 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
 			if (input.items.Count >= 1)
 				multipleRegressor.Fit(input.items[0].OfType<double[,]>(), input.items[1].OfType<double[,]>());
 		}
+
+		private void MultipleLinearRegressionPredict(IEnumerable<O> input)
+        {
+			return multipleRegressor.Predict(input.OfType<double[,]>()).Cast<O>();
+		}
+
 		public void SetInput(OhMath.DimensionalHolder<I> input)
 		{
 			if (typeof(L) == typeof(LinearRegressor))
