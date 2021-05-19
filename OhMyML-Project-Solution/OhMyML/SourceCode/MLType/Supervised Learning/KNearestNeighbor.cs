@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OhMyML.SourceCode.MLType.Supervised_Learning;
 
-namespace OhMyML.SourceCode.MLType.Supervised_Learning
+namespace OhMyML.SourceCode.MLType.SupervisedLearning
 {
-	class KNearestNeighbor : Regressor<double[], double>
+	public class KNearestNeighbor : Classify<double[]>
 	{
-		public override void Fit(double[] x, double[] y)
+		public double[] Evaluate(double[] x)
 		{
 			throw new NotImplementedException();
 		}
 
-		public override double Predict(double[] x)
+		public double[] Save(double[] x)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Train(double[] x, double[] y)
 		{
 			throw new NotImplementedException();
 		}
