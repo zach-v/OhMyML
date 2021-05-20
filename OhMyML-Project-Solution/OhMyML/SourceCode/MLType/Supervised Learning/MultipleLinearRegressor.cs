@@ -10,7 +10,7 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
     /// <summary>
     /// Implementation of Multiple Linear Regression
     /// </summary>
-    public class MultipleLinearRegressor : Regressor<double[,], double>
+    public class MultipleLinearRegressor
     {
         private double _b;
         private double[] _w;

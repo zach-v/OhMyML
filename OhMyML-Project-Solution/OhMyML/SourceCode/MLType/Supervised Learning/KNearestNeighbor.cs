@@ -5,7 +5,7 @@ using OhMyML.SourceCode.MLType.Supervised_Learning;
 
 namespace OhMyML.SourceCode.MLType.SupervisedLearning
 {
-	public class KNearestNeighbor : Classify<double[]>
+	public class KNearestNeighbor
 	{
 		public double[] Evaluate(double[] x)
 		{

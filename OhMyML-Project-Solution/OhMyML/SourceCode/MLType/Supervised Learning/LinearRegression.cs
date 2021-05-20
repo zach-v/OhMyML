@@ -10,7 +10,7 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
     /// Simple Linear Regression implementation
     /// Performs linear regression on one feature and on output value
     /// </summary>
-    public class LinearRegressor : Regressor<IEnumerable<float>>
+    public class LinearRegressor
     {
         private float _b0;
         private float _b1;
@@ -26,7 +26,7 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Fit(IEnumerable<float> x, IEnumerable<float> y)
+        public void Fit(float[] x, float[] y)
         {
             float ssxy = x.Zip(y, (a, b) => a * b).Sum() - x.Count() * x.Average() * y.Average();
             float ssxx = x.Zip(x, (a, b) => a * b).Sum() - x.Count() * x.Average() * x.Average();
@@ -40,7 +40,7 @@ namespace OhMyML.SourceCode.MLType.Supervised_Learning
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public IEnumerable<float> Predict(IEnumerable<float> x)
+        public float[] Predict(float[] x)
         {
             return x.Select(i => _b0 + i * _b1).ToArray();
         }
