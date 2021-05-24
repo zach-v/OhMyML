@@ -7,7 +7,6 @@ using OhMyML.SourceCode.MLType.Supervised_Learning;
 
 namespace OhMyML
 {
-	//!!!!!!!!!! not working yet :(
 	static class OhMyMLRunnable_Example_MultipleLinearRegression
 	{
 		// Example entry point

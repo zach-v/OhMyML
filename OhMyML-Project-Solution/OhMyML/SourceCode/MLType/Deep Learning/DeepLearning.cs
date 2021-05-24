@@ -1,20 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace OhMyML.SourceCode.MLType.DeepLearning
 {
-    public class DeepLearning<L>
+    public class DeepLearning<T>
     {
+        public List<Layer<Node<T>>> Layers { get; set; }
         public DeepLearning()
         {
         }
 
-		public double[] GetOutput()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void SetInput(double[] input)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
